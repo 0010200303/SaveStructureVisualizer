@@ -1,0 +1,204 @@
+[gd_scene load_steps=10 format=3 uid="uid://wkrwvjq64jcs"]
+
+[ext_resource type="Script" path="res://Editor/FileButton.gd" id="1_c6c1w"]
+[ext_resource type="Script" path="res://Editor/DataTypeButton.gd" id="1_gy40q"]
+[ext_resource type="Script" path="res://Editor/Tree.gd" id="2_icd85"]
+[ext_resource type="Script" path="res://Editor/CreateDataTypeDialog.gd" id="2_wlhwi"]
+[ext_resource type="Script" path="res://Editor/UnsavedFileDialog.gd" id="4_ggbgv"]
+[ext_resource type="Script" path="res://Editor/RemoveDataTypeDialog.gd" id="4_ibtw5"]
+[ext_resource type="Script" path="res://Editor/SaveFileDialog.gd" id="4_w4p8h"]
+[ext_resource type="Script" path="res://Editor/EditDataType.gd" id="5_cv6lh"]
+[ext_resource type="Script" path="res://Editor/LoadFileDialog.gd" id="5_yb50l"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuContainer" type="HBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 33.0
+grow_horizontal = 2
+
+[node name="FileButton" type="MenuButton" parent="MenuContainer"]
+layout_mode = 2
+text = "File"
+flat = false
+switch_on_hover = true
+item_count = 3
+popup/item_0/text = "New"
+popup/item_0/id = 0
+popup/item_1/text = "Save"
+popup/item_1/id = 1
+popup/item_2/text = "Load"
+popup/item_2/id = 2
+script = ExtResource("1_c6c1w")
+
+[node name="DataTypeButton" type="MenuButton" parent="MenuContainer"]
+layout_mode = 2
+text = "Data Types"
+flat = false
+switch_on_hover = true
+item_count = 3
+popup/item_0/text = "Add"
+popup/item_0/id = 0
+popup/item_1/text = "Remove"
+popup/item_1/id = 1
+popup/item_2/text = "Edit"
+popup/item_2/id = 2
+script = ExtResource("1_gy40q")
+
+[node name="Tree" type="Tree" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 35.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 0
+columns = 4
+column_titles_visible = true
+script = ExtResource("2_icd85")
+
+[node name="FileDialogs" type="Node" parent="."]
+
+[node name="UnsavedFileDialog" type="ConfirmationDialog" parent="FileDialogs"]
+title = "Save?"
+unresizable = true
+always_on_top = true
+ok_button_text = "Yes"
+dialog_text = "Save Structure to File?"
+cancel_button_text = "No"
+script = ExtResource("4_ggbgv")
+
+[node name="SaveFileDialog" type="FileDialog" parent="FileDialogs"]
+title = "Save to File"
+size = Vector2i(392, 162)
+ok_button_text = "Save"
+mode_overrides_title = false
+access = 2
+filters = PackedStringArray("*.ssv;Save Structure Visualizer File")
+script = ExtResource("4_w4p8h")
+
+[node name="LoadFileDialog" type="FileDialog" parent="FileDialogs"]
+title = "Load from File"
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.ssv;Save Structure Visualizer File")
+script = ExtResource("5_yb50l")
+
+[node name="DataTypeDialogs" type="Node" parent="."]
+
+[node name="CreateDataTypeDialog" type="AcceptDialog" parent="DataTypeDialogs"]
+title = "Create New Data Type"
+size = Vector2i(300, 125)
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(300, 100)
+script = ExtResource("2_wlhwi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DataTypeDialogs/CreateDataTypeDialog"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -860.0
+offset_bottom = 76.0
+grow_horizontal = 2
+
+[node name="DataType" type="LineEdit" parent="DataTypeDialogs/CreateDataTypeDialog/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Data Type Name"
+
+[node name="ByteSize" type="LineEdit" parent="DataTypeDialogs/CreateDataTypeDialog/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Byte Size"
+
+[node name="RemoveDataTypeDialog" type="AcceptDialog" parent="DataTypeDialogs"]
+title = "Create New Data Type"
+size = Vector2i(300, 125)
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(300, 20)
+script = ExtResource("4_ibtw5")
+
+[node name="DataType" type="OptionButton" parent="DataTypeDialogs/RemoveDataTypeDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 76.0
+
+[node name="EditDataType" type="AcceptDialog" parent="DataTypeDialogs"]
+title = "Create New Data Type"
+size = Vector2i(300, 125)
+unresizable = true
+always_on_top = true
+popup_window = true
+min_size = Vector2i(300, 20)
+script = ExtResource("5_cv6lh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DataTypeDialogs/EditDataType"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -860.0
+offset_bottom = 76.0
+grow_horizontal = 2
+size_flags_vertical = 3
+
+[node name="DataType" type="OptionButton" parent="DataTypeDialogs/EditDataType/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ByteSize" type="LineEdit" parent="DataTypeDialogs/EditDataType/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Byte Size"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -33.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+
+[node name="AddItemBeforeBtn" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Add Item Before"
+
+[node name="AddItemAfterBtn" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Add Item After"
+
+[node name="AddItemBelowBtn" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Add Item Below
+"
+
+[node name="RemoveItemBtn" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Remove Item
+"
