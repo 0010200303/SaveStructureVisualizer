@@ -1,10 +1,13 @@
 extends ConfirmationDialog
 
+signal discarded
+
 func _ready():
-	add_button("Cancel", true, "cancel")
+	add_button("No", true, "no")
 	
 	connect("custom_action", Bruh)
 
 func Bruh(action:StringName):
-	if action == "cancel":
+	if action == "no":
+		emit_signal("discarded")
 		hide()

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://7ctrfs5uki1m"]
+
+[ext_resource type="Script" path="res://Dialogs/UnsavedFileDialog.gd" id="1_266vi"]
+
+[node name="UnsavedFileDialog" type="ConfirmationDialog"]
+title = "Save?"
+unresizable = true
+always_on_top = true
+ok_button_text = "Yes"
+dialog_text = "Save Structure to File?"
+script = ExtResource("1_266vi")

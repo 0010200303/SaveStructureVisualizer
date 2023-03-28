@@ -1,9 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ybqidhoelkxy"]
+[gd_scene load_steps=2 format=3 uid="uid://bqevvtm6amg1x"]
 
-[ext_resource type="PackedScene" uid="uid://wkrwvjq64jcs" path="res://Editor/Editor.tscn" id="1_tpvgc"]
+[ext_resource type="PackedScene" uid="uid://dvl7w7fx0tbkf" path="res://Controller/Controller.tscn" id="1_w8t3a"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Panel" type="CanvasLayer"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="CanvasLayer" parent="CanvasLayer" instance=ExtResource("1_tpvgc")]
+[node name="Controller" parent="." instance=ExtResource("1_w8t3a")]
